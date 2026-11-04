@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookIt</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div>
+        <h1>BookIt</h1>
+        <p class="tagline">Book hotel rooms and event tickets in a few taps.</p>
+      </div>
+      <div class="status" id="status"><span class="dot"></span><span id="status-text">Connecting…</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="filters" aria-label="Filters">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab is-active" data-kind="">All</button>
+        <button type="button" class="tab" data-kind="hotel">Hotels</button>
+        <button type="button" class="tab" data-kind="event">Events</button>
+      </div>
+      <label>
+        <span class="sr-only">City</span>
+        <select id="city">
+          <option value="">All cities</option>
+          <option>Lagos</option>
+          <option>Abuja</option>
+          <option>Port Harcourt</option>
+        </select>
+      </label>
+    </section>
+
+    <ul class="listings" id="listings"></ul>
+
+    <section class="card mine" aria-labelledby="mine-title">
+      <h2 id="mine-title">My bookings</h2>
+      <form id="mine-form" class="mine-form">
+        <label class="grow">
+          <span class="sr-only">Your email</span>
+          <input type="email" id="mine-email" placeholder="Your email address" required>
+        </label>
+        <button type="submit">Find</button>
+      </form>
+      <ul class="bookings" id="bookings"></ul>
+      <p class="muted" id="bookings-empty" hidden>No bookings found for that email.</p>
+    </section>
+
+    <p class="disclaimer">Demo app: listings, venues and prices are fictional, and no payment is taken.</p>
+  </main>
+
+  <dialog id="book-dialog">
+    <form id="book-form" method="dialog" novalidate>
+      <h2 id="book-title">Book</h2>
+      <p class="muted" id="book-sub"></p>
+
+      <label><span>Full name</span><input id="f-name" required maxlength="100"></label>
+      <label><span>Email</span><input id="f-email" type="email" required></label>
+      <div class="row">
+        <label><span id="qty-label">Quantity</span><input id="f-qty" type="number" min="1" max="10" value="1"></label>
+        <label class="hotel-only"><span>Check-in</span><input id="f-checkin" type="date"></label>
+        <label class="hotel-only"><span>Nights</span><input id="f-nights" type="number" min="1" max="30" value="1"></label>
+      </div>
+
+      <p class="total">Total: <strong id="f-total">₦0</strong></p>
+      <p class="error" id="f-error" role="alert"></p>
+
+      <div class="actions">
+        <button type="button" class="ghost" id="f-cancel">Close</button>
+        <button type="submit" id="f-submit">Confirm booking</button>
+      </div>
+    </form>
+
+    <div id="confirm" class="confirm" hidden>
+      <h2>Booking confirmed</h2>
+      <p>Your reference is</p>
+      <p class="ref" id="confirm-ref"></p>
+      <p class="muted" id="confirm-detail"></p>
+      <div class="actions"><button type="button" id="confirm-done">Done</button></div>
+    </div>
+  </dialog>
+
+  <footer class="wrap foot">
+    <span id="version">version –</span>
+    <span><a class="link" href="admin.html">Admin</a> · <span id="env"></span></span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

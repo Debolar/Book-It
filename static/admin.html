@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookIt Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div>
+        <h1>BookIt Admin</h1>
+        <p class="tagline">Add hotels and events, and update prices and availability.</p>
+      </div>
+      <a class="link" href="/">← Back to site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="lock-card">
+      <h2>Admin key</h2>
+      <p class="muted" id="lock-note">Enter the admin key to unlock. It is kept only on this page and forgotten when you close it.</p>
+      <form id="lock-form" class="mine-form">
+        <label class="grow"><span class="sr-only">Admin key</span>
+          <input type="password" id="key" placeholder="Admin key" autocomplete="off" required>
+        </label>
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="error" id="lock-error" role="alert"></p>
+    </section>
+
+    <div id="admin" hidden>
+      <section class="card">
+        <h2>Add a listing</h2>
+        <form id="add-form" class="admin-form">
+          <label><span>Type</span>
+            <select id="a-kind"><option value="event">Event</option><option value="hotel">Hotel</option></select>
+          </label>
+          <label class="wide"><span>Title</span><input id="a-title" required maxlength="120"></label>
+          <label><span>City</span><input id="a-city" required maxlength="60" placeholder="Lagos"></label>
+          <label><span>Venue / area</span><input id="a-venue" required maxlength="120"></label>
+          <label id="date-field"><span>Event date</span><input id="a-date" type="date"></label>
+          <label><span id="price-label">Price per ticket (₦)</span><input id="a-price" type="number" min="1" required></label>
+          <label><span id="avail-label">Tickets on sale</span><input id="a-available" type="number" min="0" required></label>
+          <label class="wide"><span>Description</span><input id="a-desc" maxlength="500"></label>
+          <div class="wide add-foot">
+            <p class="error" id="add-error" role="alert"></p>
+            <p class="ok-msg" id="add-ok" role="status"></p>
+            <button type="submit">Add listing</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>All listings</h2>
+        <p class="muted">Change a price or the number of places left, then press Save on that row.</p>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID</th><th>Listing</th><th>Price (₦)</th><th>Left</th><th></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
