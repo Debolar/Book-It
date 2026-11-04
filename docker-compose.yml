@@ -1,0 +1,30 @@
+name: bookit
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bookit
+      POSTGRES_PASSWORD: bookit      # fine for local practice only
+      POSTGRES_DB: bookit
+    volumes:
+      - bookit-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bookit -d bookit"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://bookit:bookit@db:5432/bookit
+      APP_ENV: docker
+      ADMIN_API_KEY: ${ADMIN_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  bookit-data:
